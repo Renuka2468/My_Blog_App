@@ -1,0 +1,22 @@
+.flex-container {
+    margin: 50px;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+}
+
+label{
+   display:block;
+}
+textarea{
+    width:70%;
+    resize: none;
+}
+a{
+   color: black;
+   text-decoration: none;
+   border: 1px solid gray
+}
+span{
+   display:inline;
+}

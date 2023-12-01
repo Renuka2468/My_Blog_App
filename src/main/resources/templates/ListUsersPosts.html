@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="/CSS/ListUsersPosts.css"/>
+</head>
+<body>
+<h1 style="text-align: justify;">
+    <a href="/" style="text-decoration:none;color:black;font-size:2rem;">Blog Post App</a>
+</h1>
+<div th:if="${session.user}" style="display:flex;justify-content:start;">
+    <h3 th:text="'Welcome: '+${session.user.name}"></h3>
+    <button ><a href="/post">Create Blog Post</a></button>
+    <button th:if="${session.user.role}=='USER'"><a href="/user/posts">My Posts</a></button>
+    <button ><a href="/logout">Logout</a></button>
+</div>
+<div th:if="!${session.user}" style="display:flex;justify-content:start;">
+    <button ><a href="/login">Login</a></button>
+</div>
+
+<div class="flex-container">
+    <tr th:each="post: ${posts}">
+        <div class="card">
+            <a th:attr="href='/post/read/'+${post.id}"><span class="link"></span></a>
+            <h2><span th:text="${post.title}"/></h2>
+            <h3 th:if="!${post.published}">Draft</h3>
+            <h4><span th:text="${post.author}+', '+${#temporals.format(post.publishedAt, 'dd/MMM/yyy HH:mm')}"/></h4>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis perferendis labore expedita pariatur
+                voluptate, cumque unde quae facilis maiores similique, fuga quas dolore repellendus, necessitatibus
+                sapiente dicta! Error, facere tempora?</p>
+            <p>Tags: <em><span style="color:gray" th:each="tag : ${post.tags}" th:text="${tag.name} + ', '" ></span></em></p>
+        </div>
+    </tr>
+</div>
+
+
+</body>
+</html>
+
