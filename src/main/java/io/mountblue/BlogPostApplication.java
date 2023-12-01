@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogPostApplication {
 
-	//public String PORT = System.getenv("PORT");
+	public String PORT = System.getenv("PORT");
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogPostApplication.class, args);
