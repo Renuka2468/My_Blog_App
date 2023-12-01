@@ -12,7 +12,11 @@
 	<artifactId>BlogPost-Application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BlogPost-Application</name>
+<<<<<<< HEAD
 	<description>Blog post project using spring(MountBlue Curriculum)</description>
+=======
+	<description>Blog post project using spring boot</description>
+>>>>>>> 98365a2 (final commit)
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -75,6 +79,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+<<<<<<< HEAD
 	</build>
 
 </project>
+=======
+		<finalName>docker-spring-boot</finalName>
+	</build>
+
+</project>
+
+>>>>>>> 98365a2 (final commit)

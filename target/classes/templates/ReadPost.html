@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Home</title>
+  <link rel="stylesheet" href="/CSS/ReadPost.css">
+</head>
+<body>
+<h1 style="text-align: justify;">
+    <a href="/" style="text-decoration:none;color:black">Blog Post App</a>
+</h1>
+<div class="flex-container">
+    <h2><span th:text="${post.title}"/></h2>
+    <h4><span th:text="${post.author}+', '+${#temporals.format(post.publishedAt, 'dd/MMM/yyy HH:mm')}"/></h4>
+    <p><span th:text="${post.content}"/></p>
+    <p>Tags: <em><span style="color:gray" th:each="tag : ${post.tags}" th:text="${tag.name} + ', '"></span></em></p>
+</div>
+<div th:if="${session.user} AND (${session.user.role}=='ADMIN' OR ${session.user.name}==${post.author})">
+    <a th:attr="href='/post/update/'+${post.id}">Update Post</a> &nbsp;&nbsp;
+    <a th:attr="href='/post/delete/'+${post.id}">Delete Post</a>
+</div>
+<hr>
+<br>
+<h3>Add New Comment</h3>
+<div style="border:1px solid black;width:50%;padding:10px">
+    <form method="POST" th:attr="action=@{/comment/save(pid=${post.id})}">
+        <div th:unless="${session.user}">
+            <label>Name</label>
+            <input type="text" name="name" required>
+        </div>
+        <br>
+        <div th:unless="${session.user}">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+        <br>
+        <div>
+            <label>Comment</label>
+            <textarea placeholder="Write your comment here"
+                      style="height: 50px;resize: vertical;" name="comment"></textarea>
+        </div>
+        <br>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<h3>Comments</h3>
+<div th:each="comment:${post.comments}" style="border:0.1px dotted gray;padding:5px;margin:10px">
+    <div th:if="${session.user}">
+        <h4><em><span th:text="${session.user.name}+'['+${session.user.email}+'] commented on'+${#temporals.format(comment.createdAt, 'dd/MMM/yyy HH:mm')}"/></em></h4>
+    </div>
+    <div th:unless="${session.user}">
+        <h4><em><span th:text="${comment.name}+'['+${comment.email}+'] commented on'+${#temporals.format(comment.createdAt, 'dd/MMM/yyy HH:mm')}"/></em></h4>
+    </div>
+
+    <p><span th:text="${comment.comment}"/></p>
+    <div th:if="${session.user} AND (${session.user.role}=='ADMIN' OR ${session.user.name}==${post.author})">
+        <a th:href="@{/comment/edit(id=${comment.id})}">Update</a>
+        <a th:href="@{/comment/delete(id=${comment.id},postId=${post.id})}">Delete</a>
+    </div>
+</div>
+</body>
+</html>
+

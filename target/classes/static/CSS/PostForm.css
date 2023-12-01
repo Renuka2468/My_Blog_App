@@ -1,0 +1,14 @@
+  .container{
+            margin: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        label{
+            display:block;
+        }
+
+        textarea{
+            width:800px;
+            resize: none;
+        }

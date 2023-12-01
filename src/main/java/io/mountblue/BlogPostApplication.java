@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogPostApplication {
 
+<<<<<<< HEAD
+=======
+	public String PORT = System.getenv("PORT");
+>>>>>>> 98365a2 (final commit)
 	public static void main(String[] args) {
 		SpringApplication.run(BlogPostApplication.class, args);
 	}
